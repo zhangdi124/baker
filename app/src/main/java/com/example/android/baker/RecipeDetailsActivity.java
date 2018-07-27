@@ -1,20 +1,35 @@
 package com.example.android.baker;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.example.android.baker.adapters.RecipeIngredientAdapter;
 import com.example.android.baker.adapters.RecipeStepAdapter;
 import com.example.android.baker.model.Recipe;
 
 public class RecipeDetailsActivity extends RecipeActivityBase {
+    private  RecyclerView mIngredientsRV;
+    private RecyclerView mStepsRV;
+    private RecyclerView.Adapter mIngredientsAdapter;
+    private RecyclerView.Adapter mStepsAdapter;
+    private RecyclerView.LayoutManager mIngredientsLayoutManager;
+    private RecyclerView.LayoutManager mStepsLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_details);
+
+        mIngredientsRV = findViewById(R.id.ingredients);
+        mIngredientsRV.setHasFixedSize(true);
+        mIngredientsLayoutManager = new LinearLayoutManager(this);
+        mIngredientsRV.setLayoutManager(mIngredientsLayoutManager);
+
+        mStepsRV = findViewById(R.id.steps);
+        mStepsRV.setHasFixedSize(true);
+        mStepsLayoutManager = new LinearLayoutManager(this);
+        mStepsRV.setLayoutManager(mStepsLayoutManager);
     }
 
     @Override
@@ -25,16 +40,11 @@ public class RecipeDetailsActivity extends RecipeActivityBase {
 
     private void update(){
         final Recipe recipe = getRecipe();
-        final ListView ingredients = findViewById(R.id.ingredients);
-        ingredients.setAdapter(new RecipeIngredientAdapter(this, recipe.getIngredients()));
+        mIngredientsAdapter = new RecipeIngredientAdapter(recipe.getIngredients());
+        mIngredientsRV.setAdapter(mIngredientsAdapter);
 
-        final ListView steps = findViewById(R.id.steps);
-        steps.setAdapter(new RecipeStepAdapter(this, recipe));
-        steps.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                RecipeDetailsActivity.this.navigateToRecipeStep(recipe, i);
-            }
-        });
+        mStepsAdapter = new RecipeStepAdapter(recipe.getSteps());
+        mStepsRV.setAdapter(mStepsAdapter);
+
     }
 }

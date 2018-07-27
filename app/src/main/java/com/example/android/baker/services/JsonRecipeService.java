@@ -20,7 +20,7 @@ public class JsonRecipeService implements RecipeService {
     }
 
     @Override
-    public List<Recipe> GetAllRecipes() {
+    public List<Recipe> getAllRecipes() {
         final InputStream is = mContext.getResources().openRawResource(R.raw.baking);
         final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 

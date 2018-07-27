@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home_page"
+            android:onClick="launchHomePage"
+            android:title="Home">
+        </item>
+        <item
+            android:id="@+id/recipe_summary_page"
+            android:onClick="launchRecipeSummaryPage"
+            android:title="recipe_summary_page">
+        </item>
+        <item
+            android:id="@+id/recipe_step_page"
+            android:onClick="launchRecipeStepPage"
+            android:title="recipe_step_page">
+        </item>
+    </group>
+</menu>

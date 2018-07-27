@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:fillViewport="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#7d7abc">
     <android.support.constraint.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -15,7 +16,7 @@
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <com.example.android.baker.views.ExpandedListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/ingredients"
             app:layout_constraintTop_toBottomOf="@+id/ing_caption"
             android:orientation="vertical"
@@ -29,7 +30,7 @@
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <com.example.android.baker.views.ExpandedListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/steps"
             app:layout_constraintTop_toBottomOf="@+id/step_caption"
             android:orientation="vertical"

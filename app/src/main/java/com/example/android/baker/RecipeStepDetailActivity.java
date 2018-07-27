@@ -119,17 +119,17 @@ public class RecipeStepDetailActivity extends RecipeActivityBase {
             playMedia(step.getVideoURL());
         }
 
-        final ListView steps = findViewById(R.id.steps);
-        if(steps != null){
-            steps.setAdapter(new RecipeStepAdapter(this, recipe));
-            steps.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    mStep = i;
-                    update();
-                }
-            });
-        }
+//        final ListView steps = findViewById(R.id.steps);
+//        if(steps != null){
+//            steps.setAdapter(new RecipeStepAdapter(this, recipe));
+//            steps.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                    mStep = i;
+//                    update();
+//                }
+//            });
+//        }
     }
 
     private void onNext(){

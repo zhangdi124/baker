@@ -1,41 +1,57 @@
 package com.example.android.baker.adapters;
-
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.android.baker.R;
-
-import com.example.android.baker.model.Recipe;
 import com.example.android.baker.model.RecipeStep;
 
 import java.util.List;
 
-public class RecipeStepAdapter  extends ArrayAdapter<RecipeStep> {
-    private Recipe mRecipe;
 
-    public RecipeStepAdapter(Context context, Recipe recipe){
-        super(context, R.layout.recipe_step, recipe.getSteps());
-        mRecipe = recipe;
-    }
+public class RecipeStepAdapter extends RecyclerView.Adapter{
+    private class ViewHolder extends RecyclerView.ViewHolder{
+        Button mButton;
 
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        final RecipeStep recipeStep = mRecipe.getSteps().get(position);
+        public ViewHolder(View view){
+            super(view);
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.recipe_step, parent, false);
+            mButton = view.findViewById(R.id.button);
         }
 
-        Button button = convertView.findViewById(R.id.button);
-        button.setText(String.format("%d - %s", (position + 1), recipeStep.getShortDescription()));
+        public Button getButton() {
+            return mButton;
+        }
+    }
 
-        return convertView;
+    private List<RecipeStep> mRecipeSteps;
+
+    public RecipeStepAdapter(List<RecipeStep> recipeSteps){
+        mRecipeSteps = recipeSteps;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        final View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.recipe_step, parent, false);
+
+        return new RecipeStepAdapter.ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        final RecipeStep recipeStep = mRecipeSteps.get(position);
+
+        final Button button = ((RecipeStepAdapter.ViewHolder)holder).getButton();
+        button.setText(String.format("%d) %s", (position + 1), recipeStep.getShortDescription()));
+    }
+
+    @Override
+    public int getItemCount() {
+        return mRecipeSteps.size();
     }
 }
