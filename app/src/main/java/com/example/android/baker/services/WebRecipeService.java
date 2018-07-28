@@ -11,7 +11,7 @@ import java.util.List;
 
 public class WebRecipeService extends RestServiceBase implements RecipeService  {
     private static final String RECIPE_URL = "http://go.udacity.com/android-baking-app-json";
-    private List<Recipe> mAllRecipes = null;
+    private static List<Recipe> mAllRecipes = null;
 
     @Override
     public List<Recipe> getAllRecipes() {

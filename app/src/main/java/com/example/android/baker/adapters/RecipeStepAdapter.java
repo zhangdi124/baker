@@ -17,21 +17,28 @@ public class RecipeStepAdapter extends RecyclerView.Adapter{
     private class ViewHolder extends RecyclerView.ViewHolder{
         Button mButton;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view, View.OnClickListener onClickListener){
             super(view);
 
+            view.setOnClickListener(onClickListener);
             mButton = view.findViewById(R.id.button);
         }
 
         public Button getButton() {
             return mButton;
         }
+
+        public void setStep(int step){
+            itemView.setTag(step);
+        }
     }
 
     private List<RecipeStep> mRecipeSteps;
+    private View.OnClickListener mOnClickListener;
 
-    public RecipeStepAdapter(List<RecipeStep> recipeSteps){
+    public RecipeStepAdapter(List<RecipeStep> recipeSteps, View.OnClickListener onClickListener){
         mRecipeSteps = recipeSteps;
+        mOnClickListener = onClickListener;
     }
 
     @Override
@@ -39,15 +46,18 @@ public class RecipeStepAdapter extends RecyclerView.Adapter{
         final View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recipe_step, parent, false);
 
-        return new RecipeStepAdapter.ViewHolder(view);
+        return new RecipeStepAdapter.ViewHolder(view, mOnClickListener);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final RecipeStep recipeStep = mRecipeSteps.get(position);
 
-        final Button button = ((RecipeStepAdapter.ViewHolder)holder).getButton();
+        ViewHolder viewHolder = ((RecipeStepAdapter.ViewHolder)holder);
+        final Button button = viewHolder.getButton();
         button.setText(String.format("%d) %s", (position + 1), recipeStep.getShortDescription()));
+
+        viewHolder.setStep(position);
     }
 
     @Override

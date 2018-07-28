@@ -2,6 +2,8 @@ package com.example.android.baker;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -30,7 +32,7 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
-public class RecipeStepDetailActivity extends RecipeActivityBase {
+public class RecipeStepDetailActivity extends RecipeActivityBase implements View.OnClickListener{
     final private static String BUNDLE_STEP = "STEP";
     final private static String BUNDLE_VIDEOTHUMB = "VIDEOTHUMB";
     protected SimpleExoPlayer mPlayer;
@@ -41,6 +43,8 @@ public class RecipeStepDetailActivity extends RecipeActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.step_detail);
+
+        setupActionToolbar();
 
         if(savedInstanceState != null) {
             mStep = savedInstanceState.getInt(BUNDLE_STEP, -1);
@@ -119,17 +123,12 @@ public class RecipeStepDetailActivity extends RecipeActivityBase {
             playMedia(step.getVideoURL());
         }
 
-//        final ListView steps = findViewById(R.id.steps);
-//        if(steps != null){
-//            steps.setAdapter(new RecipeStepAdapter(this, recipe));
-//            steps.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                    mStep = i;
-//                    update();
-//                }
-//            });
-//        }
+        final RecyclerView steps = findViewById(R.id.steps);
+        if(steps != null){
+            final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+            steps.setLayoutManager(layoutManager);
+            steps.setAdapter(new RecipeStepAdapter(recipe.getSteps(), this));
+        }
     }
 
     private void onNext(){
@@ -176,5 +175,11 @@ public class RecipeStepDetailActivity extends RecipeActivityBase {
         mPlayer.prepare(videoSource);
         mPlayer.setPlayWhenReady(true);
         mPlayer.seekTo(mVideoThumb);
+    }
+
+    @Override
+    public void onClick(View view) {
+        mStep = (int)view.getTag();
+        update();
     }
 }

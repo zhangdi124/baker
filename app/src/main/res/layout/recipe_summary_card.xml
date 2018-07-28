@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:layout_margin="10dp"
-        app:cardBackgroundColor="#80ffffff">
+        app:cardBackgroundColor="@color/cardViewColor">
 
         <TextView
             android:id="@+id/name"
@@ -20,6 +20,6 @@
             android:text="RecipeCard"
             android:textSize="20dp"
             android:textStyle="bold|italic"
-            tools:textColor="#7d7abc" />
+            tools:textColor="@color/backgroundColor" />
     </android.support.v7.widget.CardView>
 </LinearLayout>

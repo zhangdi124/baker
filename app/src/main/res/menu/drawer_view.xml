@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/grp1" android:checkableBehavior="single">
         <item
             android:id="@+id/home_page"
-            android:onClick="launchHomePage"
-            android:title="Home">
+            android:title="Home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:onClick="onHomeClick">
         </item>
+    </group>
+    <group android:id="@+id/grp2" android:checkableBehavior="single">
         <item
             android:id="@+id/recipe_summary_page"
-            android:onClick="launchRecipeSummaryPage"
-            android:title="recipe_summary_page">
+            android:title="Recipe Summary">
         </item>
         <item
             android:id="@+id/recipe_step_page"
-            android:onClick="launchRecipeStepPage"
-            android:title="recipe_step_page">
+            android:title="Recipe Step">
         </item>
     </group>
 </menu>

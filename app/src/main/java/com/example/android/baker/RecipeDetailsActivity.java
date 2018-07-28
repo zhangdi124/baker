@@ -3,9 +3,11 @@ package com.example.android.baker;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.android.baker.adapters.RecipeIngredientAdapter;
 import com.example.android.baker.adapters.RecipeStepAdapter;
+import com.example.android.baker.listeners.RecipeStepOnClickListener;
 import com.example.android.baker.model.Recipe;
 
 public class RecipeDetailsActivity extends RecipeActivityBase {
@@ -20,6 +22,8 @@ public class RecipeDetailsActivity extends RecipeActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_details);
+
+        setupActionToolbar();
 
         mIngredientsRV = findViewById(R.id.ingredients);
         mIngredientsRV.setHasFixedSize(true);
@@ -43,7 +47,8 @@ public class RecipeDetailsActivity extends RecipeActivityBase {
         mIngredientsAdapter = new RecipeIngredientAdapter(recipe.getIngredients());
         mIngredientsRV.setAdapter(mIngredientsAdapter);
 
-        mStepsAdapter = new RecipeStepAdapter(recipe.getSteps());
+        final View.OnClickListener stepClickListener = new RecipeStepOnClickListener(this, recipe);
+        mStepsAdapter = new RecipeStepAdapter(recipe.getSteps(), stepClickListener);
         mStepsRV.setAdapter(mStepsAdapter);
 
     }

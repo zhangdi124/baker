@@ -1,41 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fillViewport="true"
+<!-- Use DrawerLayout as root container for activity -->
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7d7abc">
-    <android.support.constraint.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true">
+
+    <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
+    <FrameLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--add toolbar to layout-->
+        <include layout="@layout/toolbar"/>
+
+        <ScrollView
+            android:fillViewport="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:background="#7d7abc">
+            <android.support.constraint.ConstraintLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".RecipeDetailsActivity">
+                <TextView
+                    android:id="@+id/ing_caption"
+                    android:text=" Ingredients:"
+                    android:textSize="20sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/ingredients"
+                    app:layout_constraintTop_toBottomOf="@+id/ing_caption"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/step_caption"
+                    app:layout_constraintTop_toBottomOf="@id/ingredients"
+                    android:text=" Steps:"
+                    android:textSize="20sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/steps"
+                    app:layout_constraintTop_toBottomOf="@+id/step_caption"
+                    android:orientation="vertical"
+                    android:nestedScrollingEnabled="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </android.support.constraint.ConstraintLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
+    <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        tools:context=".RecipeDetailsActivity">
-        <TextView
-            android:id="@+id/ing_caption"
-            android:text=" Ingredients:"
-            android:textSize="20sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/ingredients"
-            app:layout_constraintTop_toBottomOf="@+id/ing_caption"
-            android:orientation="vertical"
-            android:nestedScrollingEnabled="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/step_caption"
-            app:layout_constraintTop_toBottomOf="@id/ingredients"
-            android:text=" Steps:"
-            android:textSize="20sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/steps"
-            app:layout_constraintTop_toBottomOf="@+id/step_caption"
-            android:orientation="vertical"
-            android:nestedScrollingEnabled="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </android.support.constraint.ConstraintLayout>
-</ScrollView>
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:background="@color/Light"
+        app:itemTextColor="@color/gray"
+        app:itemIconTint="@color/gray"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/drawer_view"/>
+
+</android.support.v4.widget.DrawerLayout>
+

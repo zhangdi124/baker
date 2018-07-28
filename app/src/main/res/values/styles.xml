@@ -3,9 +3,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/actionbarBackground</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="toolbarStyle">@style/BakerToolbar</item>
     </style>
 
+    <style name="BakerToolbar" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="titleTextColor">@color/white</item>
+    </style>
 </resources>
