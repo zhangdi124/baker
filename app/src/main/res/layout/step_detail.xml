@@ -18,18 +18,39 @@
         <include layout="@layout/toolbar"/>
 
         <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-            android:background="#000000"
             android:id="@+id/player_view"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
+            android:background="#000000"
             android:focusable="true"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <TextView
-            android:id="@+id/step_instructions"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/player_view"/>
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="100"
+            app:layout_constraintTop_toBottomOf="@id/player_view"
+            app:layout_constraintBottom_toTopOf="@id/back">
+
+            <ImageView
+                android:id="@+id/placeholder_image"
+                android:layout_width="0dp"
+                android:layout_weight="40"
+                android:layout_height="match_parent"
+                android:src="@drawable/baking_clipart"/>
+
+            <TextView
+                android:id="@+id/step_instructions"
+                android:layout_width="0dp"
+                android:layout_weight="60"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/back"

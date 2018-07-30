@@ -4,8 +4,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,13 +33,16 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.squareup.picasso.Picasso;
 
 public class RecipeStepDetailActivity extends RecipeActivityBase implements View.OnClickListener{
     final private static String BUNDLE_STEP = "STEP";
     final private static String BUNDLE_VIDEOTHUMB = "VIDEOTHUMB";
+    final private static String BUNDLE_PLAYERSTATE = "PLAYERSTATE";
     protected SimpleExoPlayer mPlayer;
     protected int mStep = -1;
     protected long mVideoThumb = C.TIME_UNSET;
+    protected boolean mPlayWhenReady;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,10 @@ public class RecipeStepDetailActivity extends RecipeActivityBase implements View
         if(savedInstanceState != null) {
             mStep = savedInstanceState.getInt(BUNDLE_STEP, -1);
             mVideoThumb = savedInstanceState.getLong(BUNDLE_VIDEOTHUMB, C.TIME_UNSET);
+            mPlayWhenReady = savedInstanceState.getBoolean(BUNDLE_PLAYERSTATE, true);
+        }else{
+            mVideoThumb = C.TIME_UNSET;
+            mPlayWhenReady = true;
         }
 
         findViewById(R.id.next)
@@ -77,14 +86,32 @@ public class RecipeStepDetailActivity extends RecipeActivityBase implements View
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        if (Util.SDK_INT <= 23) {
+            releasePlayer();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (Util.SDK_INT > 23) {
+            releasePlayer();
+        }
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
         if(mStep >= 0){
             outState.putInt(BUNDLE_STEP, mStep);
         }
-
-        outState.putLong(BUNDLE_VIDEOTHUMB, mPlayer.getCurrentPosition());
+        if (mPlayer != null) {
+            outState.putLong(BUNDLE_VIDEOTHUMB, mPlayer.getCurrentPosition());
+            outState.putBoolean(BUNDLE_PLAYERSTATE, mPlayer.getPlayWhenReady());
+        }
     }
 
     @Override
@@ -116,7 +143,7 @@ public class RecipeStepDetailActivity extends RecipeActivityBase implements View
         stepInstructions.setText(step.getDescription());
 
         final String videoUrl = step.getVideoURL();
-        if(videoUrl == null || videoUrl.length() == 0){
+        if(TextUtils.isEmpty(videoUrl)){
             findViewById(R.id.player_view).setVisibility(View.GONE);
         }else{
             findViewById(R.id.player_view).setVisibility(View.VISIBLE);
@@ -128,6 +155,17 @@ public class RecipeStepDetailActivity extends RecipeActivityBase implements View
             final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             steps.setLayoutManager(layoutManager);
             steps.setAdapter(new RecipeStepAdapter(recipe.getSteps(), this));
+        }
+
+        final ImageView placeholder = findViewById(R.id.placeholder_image);
+        if(placeholder != null){
+            final String thumbnailUrl = step.getThumbnailURL();
+            if(thumbnailUrl != null && thumbnailUrl.length() > 0){
+                Picasso.with(this)
+                        .load(step.getThumbnailURL())
+                        .placeholder(R.drawable.baking_clipart)
+                        .into(placeholder);
+            }
         }
     }
 
@@ -173,8 +211,18 @@ public class RecipeStepDetailActivity extends RecipeActivityBase implements View
                 dataSourceFactory, extractorsFactory, null, null);
 
         mPlayer.prepare(videoSource);
-        mPlayer.setPlayWhenReady(true);
+        mPlayer.setPlayWhenReady(mPlayWhenReady);
         mPlayer.seekTo(mVideoThumb);
+    }
+
+    private void releasePlayer(){
+        if(mPlayer != null){
+            mPlayer.release();
+            mPlayer = null;
+        }
+
+        mPlayWhenReady = true;
+        mVideoThumb = C.TIME_UNSET;
     }
 
     @Override
