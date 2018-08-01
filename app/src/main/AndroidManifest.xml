@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.baker">
 
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +19,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".RecipeDetailsActivity" />
-        <activity android:name=".RecipeStepDetailActivity"></activity>
+        <activity android:name=".RecipeStepDetailActivity" />
+
+        <receiver android:name=".BakerWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/baker_widget_provider_info" />
+        </receiver>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
 </manifest>

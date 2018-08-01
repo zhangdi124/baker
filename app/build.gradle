@@ -34,10 +34,29 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
 
     implementation 'android.arch.lifecycle:viewmodel:1.1.1'
+
     //LiveData support
     def lifecycle_version = "1.1.1"
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+
     //Drawer
     implementation 'com.android.support:appcompat-v7:27.0.0'
     implementation 'com.android.support:design:27.0.0'
+
+    //add Room dependencies
+    def room_version = "1.1.1"
+
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
+
+    // optional - RxJava support for Room
+    implementation "android.arch.persistence.room:rxjava2:$room_version"
+
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "android.arch.persistence.room:guava:$room_version"
+
+    // Test helpers
+    testImplementation "android.arch.persistence.room:testing:$room_version"
+
+
 }

@@ -28,4 +28,14 @@ public class JsonRecipeService implements RecipeService {
         final Recipe[] recipes = gson.fromJson(reader, Recipe[].class);
         return Arrays.asList(recipes);
     }
+
+    @Override
+    public Recipe findById(int id) {
+        final List<Recipe> recipes = getAllRecipes();
+        for(Recipe recipe : recipes){
+            if(recipe.getId() == id)
+                return recipe;
+        }
+        return null;
+    }
 }

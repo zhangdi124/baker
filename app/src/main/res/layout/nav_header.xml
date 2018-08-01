@@ -7,10 +7,8 @@
     android:background="@color/exo_edit_mode_background_color">
 
    <ImageView
-       android:layout_width="180dp"
-       android:layout_height="130dp"
-       android:layout_marginBottom="15dp"
-       android:layout_marginTop="15dp"
+       android:layout_width="match_parent"
+       android:layout_height="200dp"
        android:background="@drawable/nav_header"/>
 
 </LinearLayout>

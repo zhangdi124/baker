@@ -30,25 +30,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context=".RecipeDetailsActivity">
+
                 <TextView
                     android:id="@+id/ing_caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:text=" Ingredients:"
                     android:textSize="20sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:textStyle="bold|italic"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/favorite_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_favorite_border_black_24dp"
+                    android:background="@color/backgroundColor"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="2dp"/>
+
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/ingredients"
-                    app:layout_constraintTop_toBottomOf="@+id/ing_caption"
+                    app:layout_constraintTop_toBottomOf="@id/ing_caption"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+
                 <TextView
                     android:id="@+id/step_caption"
-                    app:layout_constraintTop_toBottomOf="@id/ingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text=" Steps:"
                     android:textSize="20sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:textStyle="bold|italic"
+                    app:layout_constraintTop_toBottomOf="@id/ingredients"
+                    android:layout_marginLeft="20dp"/>
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/steps"
                     app:layout_constraintTop_toBottomOf="@+id/step_caption"
@@ -68,7 +90,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:background="@color/Light"
+        android:background="@drawable/nav_background"
         app:itemTextColor="@color/gray"
         app:itemIconTint="@color/gray"
         app:headerLayout="@layout/nav_header"
