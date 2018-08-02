@@ -1,15 +1,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="#80EFEFEF"
+    android:orientation="vertical"
+    android:padding="6dp">
 
-    <ImageView
-        android:id="@+id/widget_baker_image"
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/backgroundColor"
-        android:src="@drawable/baking_clipart"/>
+        android:textColor="#FF555555"
+        android:textSize="20sp"
+        android:text="Favorite Recipes:"/>
+    <ListView
+        android:id="@+id/favorite_recipes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/empty_view"
+        android:text="You have no favorited recipes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <!--<ImageView-->
+        <!--android:id="@+id/widget_baker_image"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:background="@color/backgroundColor"-->
+        <!--android:src="@drawable/baking_clipart"/>-->
 
     <!--<TextView-->
         <!--android:id="@+id/appwidget_text"-->

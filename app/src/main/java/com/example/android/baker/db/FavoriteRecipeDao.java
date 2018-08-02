@@ -5,6 +5,8 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.database.Cursor;
+
 import java.util.List;
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
@@ -14,6 +16,9 @@ public interface FavoriteRecipeDao {
 
     @Query("SELECT * FROM favorite_recipes")
     LiveData<List<FavoriteRecipeEntry>> getFavoriteRecipes();
+
+    @Query("SELECT * FROM favorite_recipes")
+    Cursor selectAll();
 
     @Query("SELECT * FROM favorite_recipes WHERE recipeId = :id")
     FavoriteRecipeEntry getFavoriteRecipe(int id);
