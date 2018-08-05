@@ -1,5 +1,4 @@
 package com.example.android.baker;
-
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -17,8 +16,6 @@ public class BakerWidgetProvider extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-//        CharSequence widgetText = context.getString(R.string.appwidget_text);
-
         //Setup the remote views service
         Intent intent = new Intent(context, FavoritesListService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -29,15 +26,6 @@ public class BakerWidgetProvider extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.baker_widget_provider);
         views.setRemoteAdapter(appWidgetId, R.id.favorite_recipes, intent);
         views.setEmptyView(R.id.favorite_recipes, R.id.empty_view);
-
-//        views.setTextViewText(R.id.appwidget_text, widgetText);
-
-        //create an Intent to launch MainActivity when clicked
-//        Intent intent = new Intent(context, MainActivity.class);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-//
-//        //Widgets allow click handlers to only launch pending intents
-//        views.setOnClickPendingIntent(R.id.widget_baker_image, pendingIntent);
 
 
         // Instruct the widget manager to update the widget

@@ -8,6 +8,13 @@ public class Ingredient {
     @SerializedName("ingredient")
     public String name;
 
+    public Ingredient(){}
+    public Ingredient(String name, String measure, double quantity){
+        this.quantity = quantity;
+        this.measure = measure;
+        this.name = name;
+    }
+
     public double getQuantity() {
         return quantity;
     }

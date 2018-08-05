@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.example.android.baker.BakerApplication;
 import com.example.android.baker.db.FavoriteRecipeDao;
 import com.example.android.baker.db.FavoriteRecipeEntry;
 import com.example.android.baker.db.RecipeDatabase;
@@ -37,7 +38,7 @@ public class RecipeDetailsViewModel extends AndroidViewModel {
         super(application);
 
         mRecipe = new MutableLiveData<>();
-        mRecipeService = new WebRecipeService();
+        mRecipeService = BakerApplication.getService(RecipeService.class);
 
         mFavoriteRecipeDao = RecipeDatabase.getInstance(application)
                 .favoriteRecipeDao();

@@ -4,23 +4,12 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
-
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import com.example.android.baker.adapters.RecipeSummaryAdapter;
 import com.example.android.baker.listeners.RecipeOnClickListener;
 import com.example.android.baker.model.Recipe;
-import com.example.android.baker.services.RecipeService;
-import com.example.android.baker.services.WebRecipeService;
 import com.example.android.baker.viewmodel.MainViewModel;
 
 
@@ -55,23 +44,6 @@ public class MainActivity extends RecipeActivityBase {
 
         mViewModel.fetchRecipes();
 
-
-        //To handle navigation click events
-//        NavigationView navigationView = findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener({
-//                new NavigationView.OnNavigationItemSelectedListener(){
-//                    @Override
-//                    public boolean onNavigationItemSelected(MenuItem menuItem){
-//                        menuItem.setChecked(true);
-//                        mDrawerLayout.closeDrawers();
-//                        //add code here to update the UI based on the item selected
-//
-//
-//                    }
-//                }
-//        });
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    //open the drawer when the button is tapped
 }

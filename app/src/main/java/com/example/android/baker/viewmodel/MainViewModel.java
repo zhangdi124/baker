@@ -8,16 +8,17 @@ import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import com.example.android.baker.BakerApplication;
 import com.example.android.baker.model.Recipe;
 import com.example.android.baker.services.RecipeService;
-import com.example.android.baker.services.WebRecipeService;
 
 import java.util.Collections;
 import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
     final private MutableLiveData<List<Recipe>> mRecipes;
-    final private RecipeService mRecipeService;
+
+    RecipeService mRecipeService;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
@@ -25,7 +26,7 @@ public class MainViewModel extends AndroidViewModel {
         mRecipes = new MutableLiveData<>();
         mRecipes.setValue(Collections.<Recipe>emptyList());
 
-        mRecipeService = new WebRecipeService();
+        mRecipeService = BakerApplication.getService(RecipeService.class);
     }
 
     public LiveData<List<Recipe>> getRecipes(){

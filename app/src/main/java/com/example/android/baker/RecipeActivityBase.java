@@ -16,8 +16,8 @@ import com.example.android.baker.model.Recipe;
 import com.google.gson.Gson;
 
 public abstract class RecipeActivityBase extends AppCompatActivity {
-    final protected static String RECIPE = "recipe";
-    final protected static String STEP = "mStep";
+    final public static String RECIPE = "recipe";
+    final public static String STEP = "mStep";
 
     protected Recipe mRecipe = null;
 

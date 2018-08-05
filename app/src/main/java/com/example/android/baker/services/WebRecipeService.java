@@ -16,6 +16,10 @@ public class WebRecipeService extends RestServiceBase implements RecipeService  
     private static List<Recipe> mAllRecipes = null;
     private static Map<Integer, Recipe> mRecipeMap = null;
 
+    public WebRecipeService(){
+
+    }
+
     @Override
     public List<Recipe> getAllRecipes() {
         if(mAllRecipes == null || mAllRecipes.size() == 0){

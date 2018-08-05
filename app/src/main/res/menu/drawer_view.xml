@@ -8,14 +8,14 @@
             android:onClick="onHomeClick">
         </item>
     </group>
-    <group android:id="@+id/grp2" android:checkableBehavior="single">
-        <item
-            android:id="@+id/recipe_summary_page"
-            android:title="Recipe Summary">
-        </item>
-        <item
-            android:id="@+id/recipe_step_page"
-            android:title="Recipe Step">
-        </item>
-    </group>
+    <!--<group android:id="@+id/grp2" android:checkableBehavior="single">-->
+        <!--<item-->
+            <!--android:id="@+id/recipe_summary_page"-->
+            <!--android:title="Recipe Summary">-->
+        <!--</item>-->
+        <!--<item-->
+            <!--android:id="@+id/recipe_step_page"-->
+            <!--android:title="Recipe Step">-->
+        <!--</item>-->
+    <!--</group>-->
 </menu>
